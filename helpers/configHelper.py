@@ -35,6 +35,8 @@ class config:
 		"""
 		try:
 			# Try to get all the required keys
+			self.config.get("paths","lets")
+
 			self.config.get("redis","host")
 			self.config.get("redis","port")
 			self.config.get("redis","database")
@@ -58,6 +60,9 @@ class config:
 		f = open(self.fileName, "w")
 
 		# Set keys to config object
+		self.config.add_section("paths")
+		self.config.set("paths", "lets", "path-to-lets-folder")
+
 		self.config.add_section("redis")
 		self.config.set("redis", "host", "localhost")
 		self.config.set("redis", "port", "6379")
