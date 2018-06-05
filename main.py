@@ -5,8 +5,9 @@ and modified to fit the project.
 I dont see the reason to reinvent the structure if this is suppost to work alongside the original project.
 """
 import redis
+import sys
 
-from helpers import consoleHelper
+from helpers import consoleHelper, configHelper
 from common.constants import bcolors
 from objects import glob
 import redis_subscriber
@@ -18,8 +19,25 @@ if __name__ == "__main__":
 		# Server start
 		consoleHelper.printServerStartHeader(True)
 
-		# Config-setup be here
-		#----
+		# Read config.ini
+		consoleHelper.printNoNl("> Loading config file...")
+		glob.conf = configHelper.config("config.ini")
+
+		if glob.conf.default:
+			# We have generated a default config.ini, quit server
+			consoleHelper.printWarning()
+			consoleHelper.printColored("[!] config.ini not found. A default one has been generated.", bcolors.YELLOW)
+			consoleHelper.printColored("[!] Please edit your config.ini and run the server again.", bcolors.YELLOW)
+			sys.exit()
+
+		# If we haven't generated a default config.ini, check if it's valid
+		if not glob.conf.checkConfig():
+			consoleHelper.printError()
+			consoleHelper.printColored("[!] Invalid config.ini. Please configure it properly", bcolors.RED)
+			consoleHelper.printColored("[!] Delete your config.ini to generate a default one", bcolors.RED)
+			sys.exit()
+		else:
+			consoleHelper.printDone()
 
 		# Connect to redis
 		try:

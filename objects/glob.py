@@ -6,5 +6,5 @@ try:
 except:
 	VERSION = "Unknown"
 
-application = None
+conf = None
 redis = None
