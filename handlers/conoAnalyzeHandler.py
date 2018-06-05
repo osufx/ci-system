@@ -8,6 +8,8 @@ class handler(generalPubSubHandler.generalPubSubHandler):
 			"score_id": 0,
 			"beatmap_id": 0,
             "user_id": 0,
+			"game_mode": 0,
+			"pp": 0,
             "replay_data": ""
 		}
     
