@@ -42,8 +42,7 @@ if __name__ == "__main__":
 		# Connect to redis
 		try:
 			consoleHelper.printNoNl("> Connecting to redis... ")
-			#glob.redisglob.redis = redis.Redis(glob.conf.config["redis"]["host"], glob.conf.config["redis"]["port"], glob.conf.config["redis"]["database"], glob.conf.config["redis"]["password"])
-			glob.redis = redis.Redis("localhost", "6379", "0", "")
+			glob.redis = redis.Redis(glob.conf.config["redis"]["host"], glob.conf.config["redis"]["port"], glob.conf.config["redis"]["database"], glob.conf.config["redis"]["password"])
 			glob.redis.ping()
 			consoleHelper.printNoNl(" ")
 			consoleHelper.printDone()
