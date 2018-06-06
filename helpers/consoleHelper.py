@@ -5,7 +5,7 @@ Modified from https://zxq.co/ripple/pep.py/src/branch/master/helpers/consoleHelp
 from common.constants import bcolors
 from objects import glob
 
-def printServerStartHeader(asciiArt=True):
+def printServerStartHeader(asciiArt: bool = True):
 	"""
 	Print server start message
 
@@ -30,7 +30,7 @@ def printServerStartHeader(asciiArt=True):
 	printColored("> {}https://github.com/osufx/ci-system".format(bcolors.UNDERLINE), bcolors.GREEN)
 	printColored("> Press CTRL+C to exit\n", bcolors.GREEN)
 
-def printNoNl(string):
+def printNoNl(string: str):
 	"""
 	Print a string without \n at the end
 
@@ -39,7 +39,7 @@ def printNoNl(string):
 	"""
 	print(string, end="")
 
-def printColored(string, color):
+def printColored(string: str, color: str):
 	"""
 	Print a colored string
 

@@ -3,7 +3,7 @@ import datetime
 from common.constants import mods
 from common.ripple import scoreUtils
 
-def decompress_lzma(data):
+def decompress_lzma(data: bytes) -> bytes:
 	results = []
 	len(data)
 	while True:
@@ -47,7 +47,7 @@ class Replay(object):
 		self.bytes = replay_bytes
 		self.Parse()
 
-	def ReadInt(self, length: int):
+	def ReadInt(self, length: int) -> int:
 		data = self.bytes[self.position : length]
 		self.position += length
 		return int.from_bytes(data, byteorder="little")
@@ -57,7 +57,7 @@ class Replay(object):
 		self.position += 1
 		return data is 0x0B
 
-	def ReadULEB(self):
+	def ReadULEB(self) -> int:
 		data = 0
 		shift = 0
 		while True:
@@ -69,18 +69,18 @@ class Replay(object):
 			shift += 7
 		return data
 	
-	def ReadString(self, length: int):
+	def ReadString(self, length: int) -> str:
 		data = ""
 		for i in range(self.position, self.position + length):
 			data += chr(self.bytes[i])
 		self.position += length
 		return data
 	
-	def Parse_Mods(self, mask: int):
+	def Parse_Mods(self, mask: int) -> int:
 		# Since I want to save mods as the bitmask value I wont do anything here
 		return mask
 	
-	def Parse_Date(self, timestamp: int):
+	def Parse_Date(self, timestamp: int) -> str:
 		date = datetime.datetime.fromtimestamp(
 			timestamp - 62135600400000
 		)
@@ -99,10 +99,10 @@ class Replay(object):
 			if not done:
 				self.position += 1
 
-	def Parse_LZMA_Data(self, byte_data: bytes):
+	def Parse_LZMA_Data(self, byte_data: bytes) -> str:
 		return decompress_lzma(byte_data).decode("ascii")
 
-	def Parse_Replay_Data(self, replay_data):
+	def Parse_Replay_Data(self, replay_data: str) -> list:
 		data = []
 		replay_data = replay_data.split(",")
 		for part in [x.split("|") for x in replay_data]:
@@ -116,7 +116,7 @@ class Replay(object):
 			)
 		return data
 
-	def Parse_Keys(self, mask: int):
+	def Parse_Keys(self, mask: int) -> int:
 		# Meh... I dont need this right now
 		return mask
 

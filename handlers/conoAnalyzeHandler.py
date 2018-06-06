@@ -16,7 +16,7 @@ class handler(generalPubSubHandler.generalPubSubHandler):
 			"replay_data": ""
 		}
 	
-	def handle(self, data):
+	def handle(self, data: bytes):
 		data = super().parseData(data)
 		if data is None:
 			return

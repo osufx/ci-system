@@ -7,7 +7,7 @@ import configparser
 
 class config:
 	# Check if config.ini exists and load/generate it
-	def __init__(self, file):
+	def __init__(self, file: str):
 		"""
 		Initialize a config file object
 
@@ -27,7 +27,7 @@ class config:
 
 
 	# Check if config.ini has all needed the keys
-	def checkConfig(self):
+	def checkConfig(self) -> bool:
 		"""
 		Check is the config file has all required keys
 

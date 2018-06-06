@@ -9,7 +9,7 @@ class Analyze(object):
 	pp			= 0
 	replay 		= None
 	
-	def __init__(self, data):
+	def __init__(self, data: dict):
 		# Put data types into self
 		for key, value in data.items():
 			if key is not "replay_data":
@@ -19,6 +19,7 @@ class Analyze(object):
 
 		#TODO: Do the analyze stuffz
 	
-	def ParseReplay(self, base64_replay_data):
+	def ParseReplay(self, base64_replay_data: str):
 		replay_bytes = base64.b64decode(base64_replay_data)
 		self.replay = Replay(replay_bytes)
+		
