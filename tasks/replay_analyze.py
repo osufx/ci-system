@@ -43,3 +43,6 @@ class Analyze(object):
 	def CheckMissmatchReplay(self):
 		#beatmap_id
 		#TODO: Get beatmap more info and do check
+
+	def getAverageTickRate(self):
+		pass

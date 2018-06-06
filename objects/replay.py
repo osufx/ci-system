@@ -33,7 +33,7 @@ def bitmask_contains(mask: int, check: int) -> bool:
 class Replay(object):
 	mode 				= 0
 	version 			= 0
-	beatmap_hash		= ""
+	beatmap_hash 		= ""
 	username 			= ""
 	replay_hash 		= ""
 	h_300				= 0
@@ -46,7 +46,7 @@ class Replay(object):
 	max_combo			= 0
 	full_combo			= False
 	mods				= {}
-	performance_graph	= ""
+	performance_graph 	= ""
 	timestamp			= 0
 	replay_data			= {}
 
@@ -134,44 +134,44 @@ class Replay(object):
 
 	def Parse(self):
 		self.position	= 0
-		self.mode		= self.ReadInt(1)
-		self.version	= self.ReadInt(4)
+		self.mode 		= self.ReadInt(1)
+		self.version 	= self.ReadInt(4)
 
 		self.Continue()
 
-		self.beatmap_hash_length	= self.ReadULEB()
-		self.beatmap_hash			= self.ReadString(self.beatmap_hash_length)
+		self.beatmap_hash_length 	= self.ReadULEB()
+		self.beatmap_hash 			= self.ReadString(self.beatmap_hash_length)
 
 		self.Continue()
 
-		self.username_length		= self.ReadULEB()
-		self.username				= self.ReadString(self.username_length)
+		self.username_length 		= self.ReadULEB()
+		self.username 				= self.ReadString(self.username_length)
 
 		self.Continue()
 
 		self.replay_hash_length		= self.ReadULEB()
-		self.replay_hash			= self.ReadString(self.replay_hash_length)
+		self.replay_hash 			= self.ReadString(self.replay_hash_length)
 
-		self.h_300	= self.ReadInt(2)
-		self.h_100	= self.ReadInt(2)
-		self.h_50	= self.ReadInt(2)
-		self.h_geki	= self.ReadInt(2)
-		self.h_katu	= self.ReadInt(2)
-		self.h_miss	= self.ReadInt(2)
+		self.h_300 	= self.ReadInt(2)
+		self.h_100 	= self.ReadInt(2)
+		self.h_50 	= self.ReadInt(2)
+		self.h_geki = self.ReadInt(2)
+		self.h_katu = self.ReadInt(2)
+		self.h_miss = self.ReadInt(2)
 
-		self.score		= self.ReadInt(4)
-		self.max_combo	= self.ReadInt(2)
-		self.full_combo	= self.ReadInt(1) is 1
-		self.mods		= self.Parse_Mods(self.ReadInt(4))
+		self.score 		= self.ReadInt(4)
+		self.max_combo 	= self.ReadInt(2)
+		self.full_combo = self.ReadInt(1) is 1
+		self.mods 		= self.Parse_Mods(self.ReadInt(4))
 
 		self.Continue()
 
-		self.performance_graph_length	= self.ReadULEB()
-		self.performance_graph			= self.ReadString(self.performance_graph_length)
-		self.timestamp					= self.Parse_Date(self.ReadInt(8))
+		self.performance_graph_length 	= self.ReadULEB()
+		self.performance_graph 			= self.ReadString(self.performance_graph_length)
+		self.timestamp 					= self.Parse_Date(self.ReadInt(8))
 
 		self.replay_data_length			= self.ReadULEB()
 		self.Read_Until([0x5D, 0x00, 0x00])
 
-		self.replay_data				= self.Parse_LZMA_Data(self.bytes[self.position:])[:-1] # Remove an extra "," (ppy pls)
-		self.replay_data				= self.Parse_Replay_Data(self.replay_data)
+		self.replay_data 				= self.Parse_LZMA_Data(self.bytes[self.position:])[:-1] # Remove an extra "," (ppy pls)
+		self.replay_data 				= self.Parse_Replay_Data(self.replay_data)
