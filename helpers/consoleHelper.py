@@ -13,7 +13,17 @@ def printServerStartHeader(asciiArt=True):
 	:return:
 	"""
 	if asciiArt:
-		print("PLACE-HOLDER")
+		print("""
+ {b}▒{f}█████    ██████  █    ██  ▐██▌   █████{b}▒{f}██   ██{b}▒
+▒{f}██{b}▒  {f}██{b}▒▒{f}██    {b}▒  {f}██  {b}▓{f}██{b}▒ {f}▐██▌ {b}▓{f}██   {b}▒▒▒ {f}█ █ {b}▒░
+▒{f}██{b}░  {f}██{b}▒░ ▓{f}██▄   {b}▓{f}██  {b}▒{f}██{b}░ {f}▐██▌ {b}▒{f}████ {b}░░░  {f}█   {b}░
+▒{f}██   ██{b}░  ▒   {f}██{b}▒▓▓{f}█  {b}░{f}██{b}░ ▓{f}██{b}▒ ░▓{f}█{b}▒  ░ ░ {f}█ █ {b}▒
+░ {f}████{b}▓▒░▒{f}██████{b}▒▒▒▒{f}█████{b}▓  ▒{f}▄▄  {b}░▒{f}█{b}░   ▒{f}██{b}▒ ▒{f}██{b}▒
+░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░▒▓▒ ▒ ▒  ░{f}▀▀{b}▒  ▒ ░   ▒▒ ░ ░▓ ░
+  ░ ▒ ▒░ ░ ░▒  ░ ░░░▒░ ░ ░  ░  ░  ░     ░░   ░▒ ░
+░ ░ ░ ▒  ░  ░  ░   ░░░ ░ ░     ░  ░ ░    ░    ░
+    ░ ░        ░     ░      ░            ░    ░
+{e}""".format(f="\033[35m", b="\033[34m", e=bcolors.ENDC))
 
 	printColored("> Welcome to ci-system v{}".format(glob.VERSION), bcolors.GREEN)
 	printColored("> Made by Sunpy", bcolors.GREEN)
