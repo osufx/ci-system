@@ -1,3 +1,6 @@
 [submodule "common"]
 	path = common
 	url = https://github.com/osufx/ripple-python-common.git
+[submodule "objects/beatmap_parser"]
+	path = objects/beatmap_parser
+	url = https://github.com/osufx/osu-parser.git
