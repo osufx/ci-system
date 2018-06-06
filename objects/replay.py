@@ -24,12 +24,25 @@ def decompress_lzma(data):
 	return b"".join(results)
 
 class Replay(object):
-	score_id 	= 0
-	beatmap_id 	= 0
-	user_id 	= 0
-	game_mode 	= 0
-	pp 			= 0
-	
+	mode 				= 0
+	version 			= 0
+	beatmap_hash		= ""
+	username 			= ""
+	replay_hash 		= ""
+	h_300				= 0
+	h_100				= 0
+	h_50				= 0
+	h_geki				= 0
+	h_katu				= 0
+	h_miss				= 0
+	score				= 0
+	max_combo			= 0
+	full_combo			= False
+	mods				= 0
+	performance_graph	= ""
+	timestamp			= 0
+	replay_data			= {}
+
 	def __init__(self, replay_bytes: bytes):
 		self.bytes = replay_bytes
 		self.Parse()
