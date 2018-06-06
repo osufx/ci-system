@@ -2,6 +2,7 @@ import lzma
 import datetime
 from common.constants import mods
 from common.ripple import scoreUtils
+from constants import ButtonState
 
 def decompress_lzma(data: bytes) -> bytes:
 	results = []
@@ -22,6 +23,12 @@ def decompress_lzma(data: bytes) -> bytes:
 		if not decomp.eof:
 			raise lzma.LZMAError("Compressed data ended before the end-of-stream marker was reached")
 	return b"".join(results)
+
+def bitmask_match(mask: int, check: int) -> bool:
+	return (mask & check) == check
+
+def bitmask_contains(mask: int, check: int) -> bool:
+	return (mask & check) > 0
 
 class Replay(object):
 	mode 				= 0
@@ -116,9 +123,14 @@ class Replay(object):
 			)
 		return data
 
-	def Parse_Keys(self, mask: int) -> int:
-		# Meh... I dont need this right now
-		return mask
+	def Parse_Keys(self, mask: int) -> dict:
+		return {
+			M1: bitmask_match(mask, ButtonState.MOUSE_LEFT)
+			M2: bitmask_match(mask, ButtonState.MOUSE_RIGHT),
+			K1: bitmask_match(mask, ButtonState.MOUSE_LEFT | ButtonState.KEY_LEFT),
+			K2: bitmask_match(mask, ButtonState.MOUSE_RIGHT | ButtonState.KEY_RIGHT),
+			SMOKE: bitmask_contains(mask, ButtonState.SMOKE)
+		}
 
 	def Parse(self):
 		self.position	= 0
