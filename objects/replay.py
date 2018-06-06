@@ -45,7 +45,7 @@ class Replay(object):
 	score				= 0
 	max_combo			= 0
 	full_combo			= False
-	mods				= 0
+	mods				= {}
 	performance_graph	= ""
 	timestamp			= 0
 	replay_data			= {}
@@ -83,9 +83,9 @@ class Replay(object):
 		self.position += length
 		return data
 	
-	def Parse_Mods(self, mask: int) -> int:
-		# Since I want to save mods as the bitmask value I wont do anything here
-		return mask
+	def Parse_Mods(self, mask: int) -> dict:
+		# I am a bloody god (untested xD)
+		return {x: bitmask_contains(getattr(mods, x), mask) for x in dir(mods) if not x.startswith("__")}
 	
 	def Parse_Date(self, timestamp: int) -> str:
 		date = datetime.datetime.fromtimestamp(
