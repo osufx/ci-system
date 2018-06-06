@@ -6,6 +6,7 @@ I dont see the reason to reinvent the structure if this is suppost to work along
 """
 import redis
 import sys
+import os
 
 from helpers import consoleHelper, configHelper
 from common.constants import bcolors
@@ -33,11 +34,17 @@ if __name__ == "__main__":
 		# If we haven't generated a default config.ini, check if it's valid
 		if not glob.conf.checkConfig():
 			consoleHelper.printError()
-			consoleHelper.printColored("[!] Invalid config.ini. Please configure it properly", bcolors.RED)
-			consoleHelper.printColored("[!] Delete your config.ini to generate a default one", bcolors.RED)
+			consoleHelper.printColored("[!] Invalid config.ini. Please configure it properly.", bcolors.RED)
+			consoleHelper.printColored("[!] Delete your config.ini to generate a default one.", bcolors.RED)
 			sys.exit()
 		else:
 			consoleHelper.printDone()
+		
+		if not os.path.isdir(glob.conf.config["paths"]["lets"]):
+			consoleHelper.printError()
+			consoleHelper.printColored("[!] Invalid path for lets", bcolors.RED)
+			consoleHelper.printColored("[!] Please edit your config.ini and run the server again.", bcolors.RED)
+			sys.exit()
 
 		# Connect to redis
 		try:
