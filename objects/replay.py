@@ -1,4 +1,7 @@
 import lzma
+import datetime
+from common.constants import mods
+from common.ripple import scoreUtils
 
 def decompress_lzma(data):
 	results = []
@@ -61,12 +64,14 @@ class Replay(object):
 		return data
 	
 	def Parse_Mods(self, mask: int):
-		# Meh... I dont need this right now
+		# Since I want to save mods as the bitmask value I wont do anything here
 		return mask
 	
 	def Parse_Date(self, timestamp: int):
-		# Dont need this ether
-		return "Unimplemented"
+		date = datetime.datetime.fromtimestamp(
+			timestamp - 62135600400000
+		)
+		return date.strftime('%Y-%m-%d %H:%M:%S')
 	
 	def Read_Until(self, byte_array: list):
 		done = False
